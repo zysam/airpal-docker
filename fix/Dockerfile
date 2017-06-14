@@ -1,4 +1,4 @@
-FROM java:8
+FROM wbchn/airpal
 
 # MAINTAINER wbchn wbin.chn@gmail.com
 MAINTAINER zysam explnwind@gmail.com
@@ -14,27 +14,8 @@ RUN echo "deb-src http://mirrors.163.com/debian/ jessie-backports main non-free 
 RUN echo "deb http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list
 RUN echo "deb-src http://mirrors.163.com/debian-security/ jessie/updates main non-free contrib" >> /etc/apt/sources.list
 
-RUN apt-get update && \
-    apt-get install -y g++ mysql-client make
-
-# Install gradle
-RUN wget https://services.gradle.org/distributions/gradle-2.4-bin.zip
-RUN unzip gradle-2.4-bin.zip
-ENV PATH /gradle-2.4-bin/bin:$PATH
-
-# wget airpal, det dir: airpal-master
-RUN wget https://github.com/airbnb/airpal/archive/master.zip -O airpal.zip
-RUN unzip airpal.zip -d /
-
-ADD run.sh /run.sh
+ADD ../run.sh /run.sh
 RUN chmod a+x /run.sh
-
-WORKDIR /airpal-master
-RUN bash gradlew clean shadowJar
-
-# AIRPAL_DB_NAME/PRESTO_COORDINATOR_URL will disable when bind mount /airpal-master/reference.yml
-ENV AIRPAL_DB_NAME         airpaldb
-ENV PRESTO_COORDINATOR_URL http://10.8.1.9:8080
 
 EXPOSE 8081 8082
 

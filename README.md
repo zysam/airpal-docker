@@ -56,14 +56,14 @@ docker run --name airpal -v `pwd`/reference.yml:/airpal-master/reference.yml -id
 
 After running, using `docker logs -f --tail 0 airpal` monitor airpal logs.
 
-#### Run with env
+#### Run in env
 
 ```
-MYSQL_ENV_MYSQL_ROOT_PASSWORD		airpal	
-AIRPAL_DB_NAME		airpal	
-MYSQL_PORT_3306_TCP_ADDR		MYSQL	
-PRESTO_COORDINATOR_URL		http://192.168.1.10:8080	
-MYSQL_PORT_3306_TCP_PORT		3306
+MYSQL_ENV_MYSQL_ROOT_PASSWORD = airpal	
+AIRPAL_DB_NAME = airpal	
+MYSQL_PORT_3306_TCP_ADDR = MYSQL	
+PRESTO_COORDINATOR_URL = http://192.168.1.172:8080	
+MYSQL_PORT_3306_TCP_PORT = 3306
 ```
 ### Run Airpal image with Mysql image
 
